@@ -12,5 +12,5 @@ const taskData =
     }
 ];
 
-const seedTaskData = () => Project.bulkCreate(taskData);
+const seedTaskData = () => Task.bulkCreate(taskData);
 module.exports = seedTaskData;

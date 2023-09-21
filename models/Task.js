@@ -16,9 +16,6 @@ Task.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-    },
     created_date: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -40,6 +37,13 @@ Task.init(
       type: DataTypes.INTEGER,
       references: {
         model: "user",
+        key: "id",
+      },
+    },
+    project_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "project",
         key: "id",
       },
     },
