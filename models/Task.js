@@ -16,9 +16,6 @@ Task.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-    },
     created_date: {
       type: DataTypes.DATE,
       allowNull: false,
