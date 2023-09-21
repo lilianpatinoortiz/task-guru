@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS taskguru_db;
+CREATE DATABASE taskguru_db;
