@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS taskguru_db;
-CREATE DATABASE taskguru_db;
+DROP DATABASE IF EXISTS task_guru;
+CREATE DATABASE task_guru;

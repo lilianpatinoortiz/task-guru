@@ -1,34 +1,23 @@
 const sequelize = require('../config/connection');
 const { User,Task, Project } = require('../models')
 
-const userData = require('./userData.json');
-const taskData = require('./taskData.json');
-const projectData = require('./projectData.json');
+const seedUserData = require('./userData');
+const seedTaskData = require('./taskData');
+const seedProjectData = require('./projectData');
 
 
 const seedAll = async () => {
     await sequelize.sync({force:true});
-    
-   await User.bulkCreate(userData, {
-        individualHooks: true,
-        returning: true,
-      });
-    
-      for (const project of projectData) {
-        await Project.create({
-          ...project,
-        });
-      }
-      
-      for (const Task of taskData) {
-        await Task.create({
-          ...Task,
-        });
-        
+    console.log('\n----- DATABASE SYNCED -----\n');
+    await seedProjectData();
+    console.log('\n----- PROJECT DATA SEEDED -----\n');
 
-      }
-      process.exit(0);
-    };
-    
-    seedDatabase();
-    
+    await seedTaskData();
+    console.log('\n----- USER TASK SEEDED -----\n');
+
+    await seedUserData();
+    console.log('\n----- USER DATA SEEDED -----\n');
+    process.exit(0);
+};
+
+seedAll();

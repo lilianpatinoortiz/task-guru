@@ -1,3 +1,6 @@
+const { Task }  = require('../models');
+
+const taskData = 
 [
     {
         "name": "Page 10",
@@ -7,4 +10,7 @@
         "user_id": 1,
         "project_id": 1
     }
-]
+];
+
+const seedTaskData = () => Project.bulkCreate(taskData);
+module.exports = seedTaskData;
