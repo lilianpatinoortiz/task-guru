@@ -17,6 +17,19 @@
               {{project.description}}
             </p>
           </div>
+          {{#each project.tasks as |task|}}
+            <div class="col-md-12">
+              <div class="row project-header">
+                <div class="col-md-12">
+                  <p>
+                    <a href="/task/{{task.id}}">[{{task.status}}]
+                      {{task.name}}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          {{/each}}
         </div>
       </div>
     {{/each}}

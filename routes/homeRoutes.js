@@ -6,16 +6,7 @@ router.get("/", async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const projectData = await Project.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Task,
-          attributes: ["name"],
-        },
-      ],
+      include: [User, Task],
     });
 
     // Serialize data so the template can read it
@@ -42,24 +33,26 @@ router.get("/myguru", async (req, res) => {
     const user = userData.get({ plain: true });
 
     const projectData = await Project.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Task,
-          attributes: ["name"],
-        },
-      ],
+      where: {
+        user_id: req.session.user_id,
+      },
+      include: [User, Task],
     });
 
-    // Serialize data so the template can read it
     const projects = projectData.map((project) => project.get({ plain: true }));
+
+    const taskData = await Task.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const tasks = taskData.map((task) => task.get({ plain: true }));
 
     res.render("myguru", {
       ...user,
       projects,
+      tasks,
       logged_in: true,
     });
   } catch (err) {
@@ -79,16 +72,7 @@ router.get("/homepage", withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
 
     const projectData = await Project.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Task,
-          attributes: ["name"],
-        },
-      ],
+      include: [User, Task],
     });
 
     // Serialize data so the template can read it
@@ -107,16 +91,7 @@ router.get("/homepage", withAuth, async (req, res) => {
 router.get("/project/:id", async (req, res) => {
   try {
     const projectData = await Project.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Task,
-          attributes: ["name"],
-        },
-      ],
+      include: [User, Task],
     });
 
     const project = projectData.get({ plain: true });
@@ -134,16 +109,7 @@ router.get("/projects", async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const projectData = await Project.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Task,
-          attributes: ["name"],
-        },
-      ],
+      include: [User, Task],
     });
 
     // Serialize data so the template can read it
@@ -162,16 +128,7 @@ router.get("/projects", async (req, res) => {
 router.get("/tasks/:id", async (req, res) => {
   try {
     const taskData = await Task.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Project,
-          attributes: ["name"],
-        },
-      ],
+      include: [User, Project],
     });
 
     const task = taskData.get({ plain: true });
@@ -189,16 +146,7 @@ router.get("/tasks", async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const taskData = await Task.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Project,
-          attributes: ["name"],
-        },
-      ],
+      include: [User, Project],
     });
 
     // Serialize data so the template can read it

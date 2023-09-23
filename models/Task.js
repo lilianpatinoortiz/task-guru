@@ -26,6 +26,10 @@ Task.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     priority: {
       type: DataTypes.INTEGER,
       allowNull: false,

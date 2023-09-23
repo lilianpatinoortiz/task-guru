@@ -15,9 +15,21 @@ const loginFormHandler = async (event) => {
 
     if (response.ok) {
       // If successful, redirect the browser to the main page
-      document.location.replace("/homepage");
+      Swal.fire({
+        text: "Task guru is ready for you...",
+        icon: "success",
+        background: "white",
+        confirmButtonText: "Go",
+      }).then((result) => {
+        document.location.replace("/homepage");
+      });
     } else {
-      alert(response.statusText);
+      Swal.fire({
+        text: "Login failed",
+        icon: "error",
+        background: "white",
+        confirmButtonText: "Ok",
+      });
     }
   }
 };
