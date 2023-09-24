@@ -33,9 +33,12 @@
             {{#each project.tasks as |task|}}
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-md-12" id={{task.id}}>
+                  <div
+                    class="col-md-12 priority-{{task.priority}}"
+                    id={{task.id}}
+                  >
                     <input type="checkbox" id={{task.id}} />
-                    <label>{{task.name}}</label>
+                    <label>{{task.name}} - {{format_date task.due_date}}</label>
                   </div>
                 </div>
               </div>

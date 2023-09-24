@@ -119,3 +119,20 @@ li {
   font-family: monospace;
   text-align: center;
 }
+
+#main-nav {
+  padding: 0px;
+}
+
+.priority-1 {
+  border-left: solid 4px;
+  border-color: red;
+}
+.priority-2 {
+  border-left: solid 4px;
+  border-color: yellow;
+}
+.priority-3 {
+  border-left: solid 4px;
+  border-color: green;
+}
