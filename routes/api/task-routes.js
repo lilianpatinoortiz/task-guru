@@ -7,6 +7,7 @@ router.post("/", async (req, res) => {
     const newTask = await Task.create({
       ...req.body,
       user_id: req.session.user_id,
+      status: "new",
     });
 
     res.status(200).json(newTask);
