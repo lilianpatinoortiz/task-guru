@@ -130,9 +130,9 @@ li {
 }
 .priority-2 {
   border-left: solid 4px;
-  border-color: yellow;
+  border-color: rgb(255, 221, 0);
 }
 .priority-3 {
   border-left: solid 4px;
-  border-color: green;
+  border-color: rgb(41, 195, 41);
 }
