@@ -22,20 +22,6 @@
                   <a href="/project/{{project.id}}">{{project.name}}</a>
                 </h2>
               </div>
-              <button
-                style="cursor:pointer"
-                type="button"
-                class="btn btn-light btn-circle"
-              >
-                <i class="fas fa-edit fa-1x"></i>
-              </button>
-              <button
-                style="cursor:pointer"
-                type="button"
-                class="btn btn-light btn-circle"
-              >
-                <i class="fas fa-trash fa-1x"></i>
-              </button>
             </div>
           </div>
           <div class="col-md-12">
@@ -59,7 +45,23 @@
               <h6>No tasks</h6>
             </div>
           {{/if}}
-
+          <hr />
+          <div class="col-md-12" id="project-actions">
+            <button
+              style="cursor:pointer"
+              type="button"
+              class="btn btn-light btn-circle"
+            >
+              <i class="fas fa-edit fa-1x"></i>
+            </button>
+            <button
+              style="cursor:pointer"
+              type="button"
+              class="btn btn-light btn-circle"
+            >
+              <i class="fas fa-trash fa-1x"></i>
+            </button>
+          </div>
         </div>
       </div>
     {{/each}}
