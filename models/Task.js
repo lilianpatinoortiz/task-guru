@@ -26,12 +26,13 @@ Task.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     priority: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
     },
     user_id: {
       type: DataTypes.INTEGER,

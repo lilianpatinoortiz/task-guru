@@ -1,44 +1,60 @@
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fund My Project!</title>
-  <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Guru</title>
+    <link rel="stylesheet" href="/css/jass.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Link to dark theme for SweetAlert2 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/653016226d.js"
+      crossorigin="anonymous"
+    ></script>
 
-<body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">Fund My Project!</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">login</a>
-        {{/if}}
-      </nav>
-    </header>
-    <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
+  </head>
 
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
-</body>
+  <body>
+    <div class="row mb-4 content">
+      <div class="col-md-2 col-sm-12 display-flex">
+        <nav>
+          <ul id="menu-main">
+            <h3>
+              <a href="/homepage">TASK GURU</a>
+            </h3>
+            <hr />
+            {{#if logged_in}}
+              <li> <a href="/homepage">Home</a></li>
+              <li><a href="/myguru">My Guru</a></li>
+              <li> <button class="no-button" id="logout">Logout</button></li>
+            {{else}}
+              <li> <a href="/login">Login</a></li>
+            {{/if}}
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-10 col-sm-12">
+        <main class="container container-fluid mt-5">
+          <navbar class="container container-fluid mt-5"></navbar>
+          <!-- Render the sub layout -->
+          {{{body}}}
+        </main>
+      </div>
+      <footer>
+      </footer>
+    </div>
 
+    <!-- Render script for logged in users only -->
+    {{#if logged_in}}
+      <script src="/js/logout.js"></script>
+    {{/if}}
+  </body>
+  <!-- Added link to sweetalert2 -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"
+  ></script>
 </html>

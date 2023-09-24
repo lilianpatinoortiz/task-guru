@@ -1,0 +1,67 @@
+{{#if logged_in}}
+  <div class="row" style="text-align:right">
+    <div class="col-md-12">
+      <h4 style="text-align:center"> Welcome {{name}}</h4>
+      <button class="btn btn-primary" type="submit">
+        <a href="/newproject">Create project</a>
+      </button>
+      <button class="btn btn-primary" type="submit">
+        <a href="/newtask">Create task</a>
+      </button>
+    </div>
+  </div>
+  <hr />
+  <div class="row mb-4 projects">
+    {{#each projects as |project|}}
+      <div class="col-md-4">
+        <div class="row mb-4 project">
+          <div class="col-md-12">
+            <div class="row project-header">
+              <div class="col-md-12">
+                <h2>
+                  <a href="/project/{{project.id}}">{{project.name}}</a>
+                </h2>
+              </div>
+              <button
+                style="cursor:pointer"
+                type="button"
+                class="btn btn-light btn-circle"
+              >
+                <i class="fas fa-edit fa-1x"></i>
+              </button>
+              <button
+                style="cursor:pointer"
+                type="button"
+                class="btn btn-light btn-circle"
+              >
+                <i class="fas fa-trash fa-1x"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <p>
+              {{project.description}}
+            </p>
+          </div>
+          {{#if project.tasks}}
+            {{#each project.tasks as |task|}}
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12" id={{task.id}}>
+                    <input type="checkbox" id={{task.id}} />
+                    <label>{{task.name}}</label>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+            <div class="col-md-12">
+              <h6>No tasks</h6>
+            </div>
+          {{/if}}
+
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
