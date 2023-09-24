@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.render("login");
   }
 });
 
@@ -56,7 +56,7 @@ router.get("/myguru", async (req, res) => {
       logged_in: true,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.render("homepage");
   }
 });
 
@@ -84,7 +84,7 @@ router.get("/homepage", withAuth, async (req, res) => {
       logged_in: true,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.render("homepage");
   }
 });
 
