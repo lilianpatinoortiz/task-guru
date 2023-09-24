@@ -112,3 +112,10 @@ li {
   text-align: center;
   padding-bottom: 10px;
 }
+
+.welcome {
+  text-align: center;
+  color: #80808069;
+  font-family: monospace;
+  text-align: center;
+}
