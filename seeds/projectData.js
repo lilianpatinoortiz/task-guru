@@ -23,7 +23,7 @@ const projectData = [
     name: "Project 4",
     description: "Europe trip",
     due_date: "2023-09-30",
-    user_id: 2,
+    user_id: 1,
   },
 ];
 

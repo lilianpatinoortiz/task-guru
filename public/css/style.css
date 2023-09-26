@@ -42,7 +42,7 @@ footer {
 }
 
 header a {
-  color: white;
+  color: white !important;
 }
 
 .welcome {
@@ -61,10 +61,8 @@ ul {
   font-weight: bold;
 }
 
-nav {
-  & a {
-    color: white;
-  }
+nav a {
+  color: white !important;
 }
 
 h3 {
