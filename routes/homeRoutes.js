@@ -217,4 +217,21 @@ router.get("/newproject", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/editproject/:id", withAuth, async (req, res) => {
+  try {
+    const projectData = await Project.findByPk(req.params.id, {
+      include: [Task],
+    });
+
+    const project = projectData.get({ plain: true });
+
+    res.render("editproject", {
+      ...project,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;
