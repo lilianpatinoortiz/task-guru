@@ -16,7 +16,7 @@ const editProjectFormHandler = async (event) => {
         });
   
         if (response.ok) {
-          document.location.replace("/dashboard");
+          document.location.replace("/myguru");
         } else {
           alert(response.statusText);
         }
@@ -41,7 +41,7 @@ const editProjectFormHandler = async (event) => {
   };
   
   document
-    .querySelector(".editpost-form")
+    .querySelector(".editproject-form")
     .addEventListener("submit", editProjectFormHandler);
   
   document
