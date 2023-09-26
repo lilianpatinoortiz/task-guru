@@ -60,6 +60,19 @@
           </div>
         </div>
         <div class="col-md-12">
+          {{#each tasks as |task|}}
+            <div class="col-md-12 padding-task">
+              <div class="row">
+                <div
+                  class="col-md-12 priority-{{task.priority}}"
+                  id={{task.id}}
+                >
+                  <input type="checkbox" id={{task.id}} />
+                  <label>{{task.name}} - {{format_date task.due_date}}</label>
+                </div>
+              </div>
+            </div>
+          {{/each}}
         </div>
       </div>
     </div>

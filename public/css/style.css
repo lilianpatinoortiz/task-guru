@@ -150,3 +150,7 @@ li {
 .tasks-list {
   padding-top: 30px;
 }
+
+.padding-task {
+  padding: 5px;
+}
