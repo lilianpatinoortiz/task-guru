@@ -172,6 +172,16 @@ li {
 }
 
 .padding-task .row {
-  height: 30px;
+  min-height: 30px;
   border-bottom: 1px solid #80808054;
+}
+
+.tasks-completed {
+  font-size: 70px;
+  font-family: fantasy;
+  text-align: center;
+}
+
+.tasks-completed {
+  text-align: center;
 }

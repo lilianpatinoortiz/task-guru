@@ -79,12 +79,19 @@ router.get("/homepage", withAuth, async (req, res) => {
         user_id: req.session.user_id,
       },
     });
+
     const tasks = taskData.map((task) => task.get({ plain: true }));
+    const totalTasks = tasks.length ? tasks.length : 0;
+    const completedTaks = taskData.filter((task) => task.status !== "new");
+    const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
+    console.log(completedTaks);
 
     res.render("homepage", {
       ...user,
       projects,
       tasks,
+      totalTasks,
+      totalCompletedTaks,
       logged_in: true,
     });
   } catch (err) {
