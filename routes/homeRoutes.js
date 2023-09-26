@@ -63,24 +63,35 @@ router.get("/myguru", async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get("/homepage", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
       include: [{ model: Project }],
     });
-
     const user = userData.get({ plain: true });
 
     const projectData = await Project.findAll({
       include: [User, Task],
     });
-
-    // Serialize data so the template can read it
     const projects = projectData.map((project) => project.get({ plain: true }));
+
+    const taskData = await Task.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const tasks = taskData.map((task) => task.get({ plain: true }));
+    const totalTasks = tasks.length ? tasks.length : 0;
+    const completedTaks = taskData.filter((task) => task.status !== "new");
+    const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
+    console.log(completedTaks);
 
     res.render("homepage", {
       ...user,
-      ...projects,
+      projects,
+      tasks,
+      totalTasks,
+      totalCompletedTaks,
       logged_in: true,
     });
   } catch (err) {

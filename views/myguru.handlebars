@@ -53,14 +53,16 @@
             <a href="/editproject/{{project.id}}"
               style="cursor:pointer"
               type="button"
-              class="btn btn-light btn-circle"
+              data-id="{{project.id}}"
+              class="btn btn-light btn-circle edit-btn"
             >
               <i class="fas fa-edit fa-1x"></i>
             </a>
             <button
               style="cursor:pointer"
               type="button"
-              class="btn btn-light btn-circle"
+              data-id="{{project.id}}"
+              class="btn btn-light btn-circle del-btn"
             >
               <i class="fas fa-trash fa-1x"></i>
             </button>
@@ -70,3 +72,4 @@
     {{/each}}
   </div>
 {{/if}}
+     <script src="/js/myguru.js"></script>
