@@ -52,14 +52,19 @@
       <div class="row mb-4 home-element">
         <div class="col-md-12">
           <div class="row project-header">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <h4>
                 Task List
               </h4>
             </div>
+            <div class="col-md-6" style="text-align: right;">
+              <button class="btn btn-primary" type="submit">
+                <a href="/newtask">Create task</a>
+              </button>
+            </div>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 overflow-scroll">
           {{#each tasks as |task|}}
             <div class="col-md-12 padding-task">
               <div class="row">

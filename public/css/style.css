@@ -1,5 +1,6 @@
 body {
   height: 100%;
+  background-color: #0000000a;
 }
 
 .no-button {
@@ -22,6 +23,12 @@ body {
   box-shadow: inset 0 -3em 3em rgb(0 0 0 / 0%), 0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   margin: 5px;
+  background-color: white;
+  border-radius: 7px;
+}
+
+.project-header {
+  padding-top: 20px;
 }
 
 nav a:hover {
@@ -145,6 +152,8 @@ li {
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   margin: 5px;
   min-height: 300px;
+  background-color: white;
+  border-radius: 7px;
 }
 
 .tasks-list {
@@ -153,4 +162,16 @@ li {
 
 .padding-task {
   padding: 5px;
+}
+
+.overflow-scroll {
+  /* overflow: scroll;*/
+}
+.tasks-list .overflow-scroll {
+  max-height: 300px;
+}
+
+.padding-task .row {
+  height: 30px;
+  border-bottom: 1px solid #80808054;
 }
