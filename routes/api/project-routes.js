@@ -28,7 +28,7 @@ router.delete("/:id", async (req, res) => {
       return;
     }
 
-    res.status(200).json(projectData);
+    res.redirect("/"); // Redirect to the home page or another appropriate page after deletion.
   } catch (err) {
     res.status(500).json(err);
   }
