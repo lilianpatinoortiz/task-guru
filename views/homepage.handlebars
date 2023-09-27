@@ -46,6 +46,7 @@
           </div>
         </div>
         <div class="col-md-12">
+
         </div>
       </div>
     </div>
@@ -73,7 +74,12 @@
                   class="col-md-10 priority-{{task.priority}}"
                   id={{task.id}}
                 >
-                  <input type="checkbox" id={{task.id}} />
+                  <input
+                    type="checkbox"
+                    id={{task.id}}
+                    class="check-task"
+                    {{task.checked}}
+                  />
                   <label>{{task.name}} </label>
                 </div>
                 <div class="col-md-2">{{format_date task.due_date}}</div>

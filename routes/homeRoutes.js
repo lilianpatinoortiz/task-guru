@@ -4,18 +4,35 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Project }],
+    });
+    const user = userData.get({ plain: true });
+
     const projectData = await Project.findAll({
       include: [User, Task],
     });
-
-    // Serialize data so the template can read it
     const projects = projectData.map((project) => project.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
+    const taskData = await Task.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const tasks = taskData.map((task) => task.get({ plain: true }));
+    const totalTasks = tasks.length ? tasks.length : 0;
+    const completedTaks = taskData.filter((task) => task.status !== "new");
+    const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
+
     res.render("homepage", {
+      ...user,
       projects,
-      logged_in: req.session.logged_in,
+      tasks,
+      totalTasks,
+      totalCompletedTaks,
+      logged_in: true,
     });
   } catch (err) {
     res.redirect("/login");
@@ -84,7 +101,6 @@ router.get("/homepage", withAuth, async (req, res) => {
     const totalTasks = tasks.length ? tasks.length : 0;
     const completedTaks = taskData.filter((task) => task.status !== "new");
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
-    console.log(completedTaks);
 
     res.render("homepage", {
       ...user,
