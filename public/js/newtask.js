@@ -32,6 +32,7 @@ document
   .querySelector(".newtask-form")
   .addEventListener("submit", newTaskFormHandler);
 
+// Functionality for the calendar button
 var nameValue = document.getElementById("name").value;
 var namePlaceholder = document.getElementById("name").placeholder;
 
@@ -41,15 +42,29 @@ var descriptionPlaceholder = document.getElementById("description").placeholder;
 var dateValue = document.getElementById("date").value;
 var datePlaceholder = document.getElementById("date").placeholder;
 
-//onchange
-
-const config = {
+var config = {
   name: nameValue ? nameValue : namePlaceholder,
   description: descriptionValue ? descriptionValue : descriptionPlaceholder,
   startDate: dateValue ? dateValue : datePlaceholder,
   endDate: dateValue ? dateValue : datePlaceholder,
   options: ["Apple", "Google", "Outlook.com"],
 };
+
+// Onchange data, we update the information for the calendar event
+const dataChanged = () => {
+  nameValue = document.getElementById("name").value;
+  descriptionValue = document.getElementById("description").value;
+  dateValue = document.getElementById("date").value;
+
+  config = {
+    name: nameValue ? nameValue : namePlaceholder,
+    description: descriptionValue ? descriptionValue : descriptionPlaceholder,
+    startDate: dateValue ? dateValue : datePlaceholder,
+    endDate: dateValue ? dateValue : datePlaceholder,
+    options: ["Apple", "Google", "Outlook.com"],
+  };
+};
+
 const button = document.getElementById("my-default-button");
 if (button) {
   button.addEventListener("click", () => atcb_action(config, button));
