@@ -23,9 +23,13 @@ router.get("/", async (req, res) => {
 
     const tasks = taskData
       .map((task) => task.get({ plain: true }))
+      .map((task) => ({
+        ...task,
+        checked: task.status !== "new" ? "checked" : "",
+      }))
       .sort(function (x, y) {
         return x.priority - y.priority;
-      }); // sort tasks by priority;
+      }); // sort tasks by priority
     const totalTasks = tasks.length ? tasks.length : 0;
     const completedTaks = taskData.filter((task) => task.status !== "new");
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
@@ -69,6 +73,15 @@ router.get("/myguru", async (req, res) => {
     });
 
     const projects = projectData.map((project) => project.get({ plain: true }));
+    projects.forEach(function (project) {
+      console.log(project.tasks);
+      project.tasks = project.tasks.map((task) => ({
+        ...task,
+        checked: task.status !== "new" ? "checked" : "",
+      }));
+      console.log("new tasks");
+      console.log(project.tasks);
+    });
 
     const taskData = await Task.findAll({
       where: {
@@ -76,7 +89,12 @@ router.get("/myguru", async (req, res) => {
       },
     });
 
-    const tasks = taskData.map((task) => task.get({ plain: true }));
+    const tasks = taskData
+      .map((task) => task.get({ plain: true }))
+      .map((task) => ({
+        ...task,
+        checked: task.status !== "new" ? "checked" : "",
+      }));
 
     res.render("myguru", {
       ...user,
@@ -111,6 +129,10 @@ router.get("/homepage", withAuth, async (req, res) => {
 
     const tasks = taskData
       .map((task) => task.get({ plain: true }))
+      .map((task) => ({
+        ...task,
+        checked: task.status !== "new" ? "checked" : "",
+      }))
       .sort(function (x, y) {
         return x.priority - y.priority;
       }); // sort tasks by priority

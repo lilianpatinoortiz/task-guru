@@ -37,7 +37,13 @@
                     class="col-md-12 priority-{{task.priority}}"
                     id={{task.id}}
                   >
-                    <input type="checkbox" id={{task.id}} />
+                    <input
+                      type="checkbox"
+                      data-id={{task.id}}
+                      data-status={{task.status}}
+                      class="check-task"
+                      {{task.checked}}
+                    />
                     <label>{{task.name}} - {{format_date task.due_date}}</label>
                   </div>
                 </div>
@@ -50,7 +56,8 @@
           {{/if}}
           <hr />
           <div class="col-md-12" id="project-actions">
-            <a href="/editproject/{{project.id}}"
+            <a
+              href="/editproject/{{project.id}}"
               style="cursor:pointer"
               type="button"
               data-id="{{project.id}}"
@@ -72,4 +79,4 @@
     {{/each}}
   </div>
 {{/if}}
-     <script src="/js/myguru.js"></script>
+<script src="/js/myguru.js"></script>

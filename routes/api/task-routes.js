@@ -68,9 +68,10 @@ router.put("/:id", async (req, res) => {
       },
     });
     if (!taskData) {
-      res.status(404).json({ message: "No user found with this id!" });
+      res.status(404).json({ message: "No task found with this id!" });
       return;
     }
+    console.log(taskData);
     res.status(200).json(taskData);
   } catch (err) {
     res.status(500).json(err);

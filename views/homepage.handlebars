@@ -97,7 +97,8 @@
                 >
                   <input
                     type="checkbox"
-                    id={{task.id}}
+                    data-id={{task.id}}
+                    data-status={{task.status}}
                     class="check-task"
                     {{task.checked}}
                   />
@@ -120,3 +121,4 @@
     </div>
   </div>
 {{/if}}
+<script src="/js/edittask.js"></script>
