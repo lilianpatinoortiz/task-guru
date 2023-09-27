@@ -185,3 +185,8 @@ li {
 .tasks-completed {
   text-align: center;
 }
+
+.project-header-title {
+  color: #4066d3;
+  font-size: xx-large;
+}

@@ -79,8 +79,6 @@ router.get("/myguru", async (req, res) => {
         ...task,
         checked: task.status !== "new" ? "checked" : "",
       }));
-      console.log("new tasks");
-      console.log(project.tasks);
     });
 
     const taskData = await Task.findAll({
@@ -157,44 +155,59 @@ router.get("/homepage", withAuth, async (req, res) => {
       logged_in: true,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.redirect("/login");
   }
 });
 
 router.get("/project/:id", async (req, res) => {
   try {
-    const projectData = await Project.findByPk(req.params.id, {
-      include: [User, Task],
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Project }],
     });
+    const user = userData.get({ plain: true });
 
+    const projectData = await Project.findByPk(req.params.id);
     const project = projectData.get({ plain: true });
 
+    const taskData = await Task.findAll({
+      where: {
+        user_id: req.session.user_id,
+        project_id: req.params.id,
+      },
+    });
+    console.log(taskData);
+    const tasks = taskData
+      .map((task) => task.get({ plain: true }))
+      .map((task) => ({
+        ...task,
+        checked: task.status !== "new" ? "checked" : "",
+      }))
+      .sort(function (x, y) {
+        return x.priority - y.priority;
+      }); // sort tasks by priority
+    const totalTasks = tasks.length ? tasks.length : 0;
+    const completedTaks = taskData.filter((task) => task.status !== "new");
+    const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
+    const tasksDueSoon = taskData
+      .map((task) => task.get({ plain: true }))
+      .filter((task) => task.status == "new")
+      .sort(function (x, y) {
+        return x.due_date - y.due_date;
+      })
+      .slice(0, 5); //  filter new tasks, order tasks asc by due_date, return the top 5
+
     res.render("project", {
-      ...project,
-      logged_in: req.session.logged_in,
+      ...user,
+      project,
+      tasks,
+      totalTasks,
+      totalCompletedTaks,
+      tasksDueSoon,
+      logged_in: true,
     });
   } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get("/projects", async (req, res) => {
-  try {
-    // Get all projects and JOIN with user data
-    const projectData = await Project.findAll({
-      include: [User, Task],
-    });
-
-    // Serialize data so the template can read it
-    const projects = projectData.map((project) => project.get({ plain: true }));
-
-    // Pass serialized data and session flag into template
-    res.render("homepage", {
-      projects,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
+    res.redirect("/homepage");
   }
 });
 
@@ -211,7 +224,7 @@ router.get("/tasks/:id", async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.redirect("/homepage");
   }
 });
 
@@ -231,7 +244,7 @@ router.get("/tasks", async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.redirect("/homepage");
   }
 });
 
@@ -269,7 +282,7 @@ router.get("/newtask", withAuth, async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.redirect("/homepage");
   }
 });
 
@@ -287,7 +300,7 @@ router.get("/newproject", withAuth, async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.redirect("/homepage");
   }
 });
 
@@ -304,7 +317,7 @@ router.get("/editproject/:id", withAuth, async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.redirect("/homepage");
   }
 });
 module.exports = router;
