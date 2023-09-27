@@ -190,3 +190,7 @@ li {
   color: #4066d3;
   font-size: xx-large;
 }
+
+#my-default-button {
+  background-color: #e069c4;
+}

@@ -15,15 +15,25 @@
     <form class="form newtask-form">
       <div class="form-group">
         <label for="name">Name</label>
-        <input class="form-input" type="text" id="name" />
+        <input class="form-input" type="text" id="name" placeholder="My task" />
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <input class="form-input" type="text" id="description" />
+        <input
+          class="form-input"
+          type="text"
+          id="description"
+          placeholder="My task description"
+        />
       </div>
       <div class="form-group">
         <label for="due-date">Due date</label>
-        <input class="form-input" type="date" id="date" />
+        <input
+          class="form-input"
+          type="date"
+          id="date"
+          placeholder="2023-12-24"
+        />
       </div>
       <div class="form-group">
         <label for="projects-options">Project</label>
@@ -41,14 +51,24 @@
           <option value="3">3</option>
         </select>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">create</button>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">create</button>
+          </div>
+        </div>
+        <div class="col-md-6" style="text-align:right">
+          <div class="form-group">
+            <button class="btn btn-primary" id="my-default-button">Add to my
+              calendar!</button>
+          </div>
+        </div>
       </div>
     </form>
   </div>
 </div>
 <div class="row" style="justify-content: space-between;">
-  <add-to-calendar-button
+  {{! <add-to-calendar-button
     id="calendar-button"
     name="Add the title of your event"
     description="A nice description does not hurt"
@@ -56,16 +76,8 @@
     endDate="2022-02-21"
     options="['Apple','Google','Microsoft365','Outlook.com','Yahoo']"
   >
-  </add-to-calendar-button>
+  </add-to-calendar-button> }}
 </div>
-<script type="application/javascript">
-  const config = { name: document.getElementById('name').value, description:
-  "hello", startDate: "2023-09-26", options:
-  ['Apple','Google','Microsoft365','Outlook.com','Yahoo'], timeZone:
-  "America/Los_Angeles" }; const button =
-  document.getElementById('calendar-button'); if (button) {
-  button.addEventListener('click', () => atcb_action(config, button)); }
-</script>
 <script
   src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2"
   async
