@@ -71,7 +71,6 @@ router.put("/:id", async (req, res) => {
       res.status(404).json({ message: "No task found with this id!" });
       return;
     }
-    console.log(taskData);
     res.status(200).json(taskData);
   } catch (err) {
     res.status(500).json(err);

@@ -7,7 +7,7 @@ editTaskCheck.forEach((check) => {
     const status = oldStatus == "new" ? "done" : "new";
     console.log(oldStatus);
     console.log(status);
-    const response = await fetch(`/api/tasks/200`, {
+    const response = await fetch(`/api/tasks/${id}`, {
       method: "PUT",
       body: JSON.stringify({ status }),
       headers: { "Content-Type": "application/json" },
