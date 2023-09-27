@@ -21,7 +21,11 @@ router.get("/", async (req, res) => {
       },
     });
 
-    const tasks = taskData.map((task) => task.get({ plain: true }));
+    const tasks = taskData
+      .map((task) => task.get({ plain: true }))
+      .sort(function (x, y) {
+        return x.priority - y.priority;
+      }); // sort tasks by priority;
     const totalTasks = tasks.length ? tasks.length : 0;
     const completedTaks = taskData.filter((task) => task.status !== "new");
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
@@ -105,7 +109,11 @@ router.get("/homepage", withAuth, async (req, res) => {
       },
     });
 
-    const tasks = taskData.map((task) => task.get({ plain: true }));
+    const tasks = taskData
+      .map((task) => task.get({ plain: true }))
+      .sort(function (x, y) {
+        return x.priority - y.priority;
+      }); // sort tasks by priority
     const totalTasks = tasks.length ? tasks.length : 0;
     const completedTaks = taskData.filter((task) => task.status !== "new");
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
