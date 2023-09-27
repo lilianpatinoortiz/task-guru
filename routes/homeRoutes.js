@@ -27,10 +27,11 @@ router.get("/", async (req, res) => {
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
     const tasksDueSoon = taskData
       .map((task) => task.get({ plain: true }))
+      .filter((task) => task.status == "new")
       .sort(function (x, y) {
         return x.due_date - y.due_date;
       })
-      .slice(0, 5); // order tasks asc by due_date, get the top 5
+      .slice(0, 5); //  filter new tasks, order tasks asc by due_date, return the top 5
 
     res.render("homepage", {
       ...user,
@@ -110,10 +111,11 @@ router.get("/homepage", withAuth, async (req, res) => {
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
     const tasksDueSoon = taskData
       .map((task) => task.get({ plain: true }))
+      .filter((task) => task.status == "new")
       .sort(function (x, y) {
         return x.due_date - y.due_date;
       })
-      .slice(0, 5); // order tasks asc by due_date, get the top 5
+      .slice(0, 5); //  filter new tasks, order tasks asc by due_date, return the top 5
 
     res.render("homepage", {
       ...user,

@@ -15,7 +15,11 @@
           </div>
         </div>
         <div class="col-md-12 tasks-completed">
-          <label>{{totalCompletedTaks}}/{{totalTasks}}</label>
+          {{#if totalTasks}}
+            <label>{{totalCompletedTaks}}/{{totalTasks}}</label>
+          {{else}}
+            <label>0</label>
+          {{/if}}
         </div>
       </div>
     </div>
@@ -31,19 +35,23 @@
           </div>
         </div>
         <div class="col-md-12">
-          {{#each tasksDueSoon as |task|}}
-            <div class="col-md-12 padding-task">
-              <div class="row">
-                <div class="col-md-8 col-sm-8" id={{task.id}}>
-                  <i class="fa fa-dot-circle-o fa-1x"></i>
-                  <label>{{task.name}} </label>
+          {{#if tasksDueSoon.length}}
+            {{#each tasksDueSoon as |task|}}
+              <div class="col-md-12 padding-task">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8" id={{task.id}}>
+                    <i class="fa fa-dot-circle-o fa-1x"></i>
+                    <label>{{task.name}} </label>
+                  </div>
+                  <div class="col-md-4 col-sm-4">{{format_date
+                      task.due_date
+                    }}</div>
                 </div>
-                <div class="col-md-4 col-sm-4">{{format_date
-                    task.due_date
-                  }}</div>
               </div>
-            </div>
-          {{/each}}
+            {{/each}}
+          {{else}}
+            <label>You don't have tasks due soon :)</label>
+          {{/if}}
         </div>
       </div>
     </div>
