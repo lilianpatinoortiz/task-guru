@@ -25,6 +25,12 @@ router.get("/", async (req, res) => {
     const totalTasks = tasks.length ? tasks.length : 0;
     const completedTaks = taskData.filter((task) => task.status !== "new");
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
+    const tasksDueSoon = taskData
+      .map((task) => task.get({ plain: true }))
+      .sort(function (x, y) {
+        return x.due_date - y.due_date;
+      })
+      .slice(0, 5); // order tasks asc by due_date, get the top 5
 
     res.render("homepage", {
       ...user,
@@ -32,6 +38,7 @@ router.get("/", async (req, res) => {
       tasks,
       totalTasks,
       totalCompletedTaks,
+      tasksDueSoon,
       logged_in: true,
     });
   } catch (err) {
@@ -101,6 +108,12 @@ router.get("/homepage", withAuth, async (req, res) => {
     const totalTasks = tasks.length ? tasks.length : 0;
     const completedTaks = taskData.filter((task) => task.status !== "new");
     const totalCompletedTaks = completedTaks.length ? completedTaks.length : 0;
+    const tasksDueSoon = taskData
+      .map((task) => task.get({ plain: true }))
+      .sort(function (x, y) {
+        return x.due_date - y.due_date;
+      })
+      .slice(0, 5); // order tasks asc by due_date, get the top 5
 
     res.render("homepage", {
       ...user,
@@ -108,6 +121,7 @@ router.get("/homepage", withAuth, async (req, res) => {
       tasks,
       totalTasks,
       totalCompletedTaks,
+      tasksDueSoon,
       logged_in: true,
     });
   } catch (err) {
