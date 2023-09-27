@@ -53,6 +53,18 @@
       <script src="/js/logout.js"></script>
     {{/if}}
   </body>
+
+<h1>Homepage</h1>
+<ul>
+  {{#each tasks}}
+  <li>
+    <strong>{{title}}</strong><br>
+    {{description}}<br>
+    Due Date: {{due_date}}
+  </li>
+  {{/each}}
+</ul>
+
   <!-- Added link to sweetalert2 -->
   <script
     src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"

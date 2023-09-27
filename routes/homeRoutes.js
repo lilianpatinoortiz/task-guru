@@ -275,4 +275,48 @@ router.get("/editproject/:id", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/myguru", async (req, res) => {
+  try {
+    // Find the logged-in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Project }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const projectData = await Project.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      include: [User, Task],
+    });
+
+    const projects = projectData.map((project) => project.get({ plain: true }));
+
+    const taskData = await Task.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const tasks = taskData.map((task) => task.get({ plain: true }));
+
+    // Sort tasks by due_date in ascending order
+    tasks.sort((a, b) => {
+      return new Date(a.due_date) - new Date(b.due_date);
+    });
+
+    res.render("homepage", {
+      ...user,
+      projects,
+      tasks, // Pass the sorted tasks
+      logged_in: true,
+    });
+  } catch (err) {
+    res.redirect("/homepage");
+  }
+});
+
 module.exports = router;
