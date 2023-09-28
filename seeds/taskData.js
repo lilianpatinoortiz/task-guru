@@ -16,7 +16,7 @@ const taskData = [
     due_date: "2023-09-30",
     priority: 1,
     user_id: 1,
-    project_id: 3,
+    project_id: 2,
     status: "new",
   },
   {
@@ -25,7 +25,7 @@ const taskData = [
     due_date: "2023-09-30",
     priority: 2,
     user_id: 1,
-    project_id: 3,
+    project_id: 2,
     status: "new",
   },
   {
@@ -34,7 +34,7 @@ const taskData = [
     due_date: "2023-09-30",
     priority: 1,
     user_id: 1,
-    project_id: 4,
+    project_id: 3,
     status: "new",
   },
 ];

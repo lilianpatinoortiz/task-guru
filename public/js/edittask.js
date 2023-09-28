@@ -1,3 +1,5 @@
+/* Edit a task functionality */
+
 const editTaskCheck = document.querySelectorAll(".check-task");
 
 editTaskCheck.forEach((check) => {

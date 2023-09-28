@@ -1,3 +1,5 @@
+/* Create a task functionality */
+
 const newTaskFormHandler = async (event) => {
   event.preventDefault();
 

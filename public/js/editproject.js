@@ -1,3 +1,5 @@
+/* Edit a project functionality */
+
 const editProjectFormHandler = async (event) => {
   event.preventDefault();
   if (event.target.hasAttribute("data-id")) {

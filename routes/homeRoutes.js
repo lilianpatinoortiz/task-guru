@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Project, User, Task } = require("../models");
 const withAuth = require("../utils/auth");
 
+// Main route
 router.get("/", async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -55,9 +56,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/myguru", async (req, res) => {
+// my guru page, where the user can create projects and tasks
+router.get("/myguru", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
       include: [{ model: Project }],
@@ -78,7 +79,7 @@ router.get("/myguru", async (req, res) => {
       project.tasks = project.tasks.map((task) => ({
         ...task,
         checked: task.status !== "new" ? "checked" : "",
-      }));
+      })); // we set the check box depending on the task status :)
     });
 
     const taskData = await Task.findAll({
@@ -92,7 +93,7 @@ router.get("/myguru", async (req, res) => {
       .map((task) => ({
         ...task,
         checked: task.status !== "new" ? "checked" : "",
-      }));
+      })); // we set the check box depending on the task status :)
 
     res.render("myguru", {
       ...user,
@@ -105,6 +106,7 @@ router.get("/myguru", async (req, res) => {
   }
 });
 
+//homepage, where the user can see the tasks, progress and statuses
 // Use withAuth middleware to prevent access to route
 router.get("/homepage", withAuth, async (req, res) => {
   try {
@@ -159,7 +161,8 @@ router.get("/homepage", withAuth, async (req, res) => {
   }
 });
 
-router.get("/project/:id", async (req, res) => {
+// project page details, get by id
+router.get("/project/:id", withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
@@ -211,7 +214,8 @@ router.get("/project/:id", async (req, res) => {
   }
 });
 
-router.get("/tasks/:id", async (req, res) => {
+// tasks details, get by id
+router.get("/tasks/:id", withAuth, async (req, res) => {
   try {
     const taskData = await Task.findByPk(req.params.id, {
       include: [User, Project],
@@ -228,17 +232,13 @@ router.get("/tasks/:id", async (req, res) => {
   }
 });
 
-router.get("/tasks", async (req, res) => {
+// Tasks page
+router.get("/tasks", withAuth, async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
     const taskData = await Task.findAll({
       include: [User, Project],
     });
-
-    // Serialize data so the template can read it
     const tasks = taskData.map((task) => task.get({ plain: true }));
-
-    // Pass serialized data and session flag into template
     res.render("task", {
       tasks,
       logged_in: req.session.logged_in,
@@ -268,6 +268,7 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+// page to create a new task
 router.get("/newtask", withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -286,6 +287,7 @@ router.get("/newtask", withAuth, async (req, res) => {
   }
 });
 
+// page to create a new project
 router.get("/newproject", withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -304,6 +306,7 @@ router.get("/newproject", withAuth, async (req, res) => {
   }
 });
 
+// pafe to edit a project
 router.get("/editproject/:id", withAuth, async (req, res) => {
   try {
     const projectData = await Project.findByPk(req.params.id, {
