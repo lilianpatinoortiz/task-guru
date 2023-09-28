@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Project, Task, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
+// create one user
 router.post("/", async (req, res) => {
   try {
     const newUser = await User.create({
@@ -14,6 +15,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// delete one user
 router.delete("/:id", async (req, res) => {
   try {
     const userData = await User.destroy({
@@ -33,6 +35,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// get all users
 router.get("/", async (req, res) => {
   try {
     const users = await User.findAll({
@@ -85,6 +88,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
+// get one user
 router.get("/:id", async (req, res) => {
   try {
     const users = await User.findOne({
@@ -97,6 +101,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// update one user
 router.put("/:id", async (req, res) => {
   try {
     const userData = await User.update(req.body, {

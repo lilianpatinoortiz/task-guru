@@ -1,7 +1,7 @@
 {{#if logged_in}}
   <div class="row" style="text-align:right">
     <div class="col-md-12">
-      <h4 class="welcome"> Welcome {{name}}</h4>
+      <h4 class="welcome"> Welcome back {{name}}</h4>
       <button class="btn btn-primary" type="submit">
         <a href="/newproject">Create project</a>
       </button>
@@ -19,7 +19,9 @@
             <div class="row project-header">
               <div class="col-md-12">
                 <h2>
-                  {{project.name}}
+                  <a href="/project/{{project.id}}">
+                    {{project.name}}
+                  </a>
                 </h2>
               </div>
             </div>
@@ -37,7 +39,13 @@
                     class="col-md-12 priority-{{task.priority}}"
                     id={{task.id}}
                   >
-                    <input type="checkbox" id={{task.id}} />
+                    <input
+                      type="checkbox"
+                      data-id={{task.id}}
+                      data-status={{task.status}}
+                      class="check-task"
+                      {{task.checked}}
+                    />
                     <label>{{task.name}} - {{format_date task.due_date}}</label>
                   </div>
                 </div>
@@ -50,7 +58,8 @@
           {{/if}}
           <hr />
           <div class="col-md-12" id="project-actions">
-            <a href="/editproject/{{project.id}}"
+            <a
+              href="/editproject/{{project.id}}"
               style="cursor:pointer"
               type="button"
               data-id="{{project.id}}"
@@ -72,4 +81,5 @@
     {{/each}}
   </div>
 {{/if}}
-     <script src="/js/myguru.js"></script>
+<script src="/js/myguru.js"></script>
+<script src="/js/edittask.js"></script>

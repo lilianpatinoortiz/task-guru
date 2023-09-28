@@ -165,10 +165,11 @@ li {
 }
 
 .overflow-scroll {
-  /* overflow: scroll;*/
+  overflow: scroll;
+  margin-bottom: 20px;
 }
 .tasks-list .overflow-scroll {
-  max-height: 300px;
+  max-height: 200px;
 }
 
 .padding-task .row {
@@ -184,4 +185,18 @@ li {
 
 .tasks-completed {
   text-align: center;
+}
+
+.project-header-title {
+  color: #4066d3;
+  font-size: xx-large;
+}
+
+#my-default-button {
+  background-color: #e069c4;
+}
+
+.container-nomargin {
+  margin-left: 10px !important;
+  margin-right: 50px !important;
 }

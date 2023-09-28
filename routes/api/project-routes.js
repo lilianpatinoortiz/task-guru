@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Project, Task, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
+// create project
 router.post("/", async (req, res) => {
   try {
     const newProject = await Project.create({
@@ -15,6 +16,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// delete project
 router.delete("/:id", async (req, res) => {
   try {
     const projectData = await Project.destroy({
@@ -24,15 +26,20 @@ router.delete("/:id", async (req, res) => {
     });
 
     if (!projectData) {
-      res.status(404).json({ message: "No project found with this id!" });
+      res.status(200).json({ message: "No project found with this id!" });
       return;
     }
+<<<<<<< HEAD
     res.status(200).json(projectData);
+=======
+    res.render("myguru"); // Redirect to the home page or another appropriate page after deletion.
+>>>>>>> 0a40c1ae0c94421585ddc4d894846718f0bb20ea
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(projectData);
   }
 });
 
+// get all projects
 router.get("/", async (req, res) => {
   try {
     const projects = await Project.findAll({
@@ -44,6 +51,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get one project
 router.get("/:id", async (req, res) => {
   try {
     const projects = await Project.findOne({
@@ -56,6 +64,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//update one project
 router.put("/:id", async (req, res) => {
   try {
     const projectData = await Project.update(req.body, {

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Project, Task, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
+// create a task
 router.post("/", async (req, res) => {
   try {
     const newTask = await Task.create({
@@ -17,6 +18,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// delete a task
 router.delete("/:id", async (req, res) => {
   try {
     const taskData = await Task.destroy({
@@ -36,6 +38,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// get all tasks
 router.get("/", async (req, res) => {
   try {
     const tasks = await Task.findAll({
@@ -48,6 +51,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get one task
 router.get("/:id", async (req, res) => {
   try {
     const tasks = await Task.findOne({
@@ -60,6 +64,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// update one task
 router.put("/:id", async (req, res) => {
   try {
     const taskData = await Task.update(req.body, {
@@ -68,7 +73,7 @@ router.put("/:id", async (req, res) => {
       },
     });
     if (!taskData) {
-      res.status(404).json({ message: "No user found with this id!" });
+      res.status(404).json({ message: "No task found with this id!" });
       return;
     }
     res.status(200).json(taskData);
