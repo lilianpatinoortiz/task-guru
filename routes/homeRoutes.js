@@ -41,7 +41,11 @@ router.get("/", async (req, res) => {
         return x.due_date - y.due_date;
       })
       .slice(0, 5); //  filter new tasks, order tasks asc by due_date, return the top 5
-
+    const projectList = projectData
+      .map((project) => project.get({ plain: true }))
+      .sort(function (x, y) {
+        return x.due_date - y.due_date;
+      });
     res.render("homepage", {
       ...user,
       projects,
@@ -49,6 +53,7 @@ router.get("/", async (req, res) => {
       totalTasks,
       totalCompletedTaks,
       tasksDueSoon,
+      projectList,
       logged_in: true,
     });
   } catch (err) {
@@ -149,12 +154,11 @@ router.get("/homepage", withAuth, async (req, res) => {
         return x.due_date - y.due_date;
       })
       .slice(0, 5); //  filter new tasks, order tasks asc by due_date, return the top 5
-const projectList = projectData
+    const projectList = projectData
       .map((project) => project.get({ plain: true }))
-      .sort(function (x,y){
+      .sort(function (x, y) {
         return x.due_date - y.due_date;
-      })
-console.log (projectList);
+      });
 
     res.render("homepage", {
       ...user,
