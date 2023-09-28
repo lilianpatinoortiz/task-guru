@@ -29,11 +29,7 @@ router.delete("/:id", async (req, res) => {
       res.status(200).json({ message: "No project found with this id!" });
       return;
     }
-<<<<<<< HEAD
     res.status(200).json(projectData);
-=======
-    res.render("myguru"); // Redirect to the home page or another appropriate page after deletion.
->>>>>>> 0a40c1ae0c94421585ddc4d894846718f0bb20ea
   } catch (err) {
     res.status(500).json(projectData);
   }

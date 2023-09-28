@@ -61,15 +61,31 @@
           <div class="row project-header">
             <div class="col-md-12">
               <h4>
-                Chart
+                Project List
               </h4>
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-
+<div class="col-md-12">
+          {{#if projectList.length}}
+            {{#each projectList as |project|}}
+              <div class="col-md-12 padding-task">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8" id={{project.id}}>
+                    <i class="fa-solid fa-folder"></i>
+                    <label>{{project.name}} </label>
+                  </div>
+                  <div class="col-md-4 col-sm-4">{{format_date
+                      project.due_date
+                    }}</div>
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+            <label>You don't have Projects due soon :)</label>
+          {{/if}}
         </div>
-      </div>
+        </div>
     </div>
     <div class="col-md-12 tasks-list">
       <div class="row mb-4 home-element">
