@@ -27,8 +27,7 @@ router.delete("/:id", async (req, res) => {
       res.status(404).json({ message: "No project found with this id!" });
       return;
     }
-
-    res.redirect("/"); // Redirect to the home page or another appropriate page after deletion.
+    res.status(200).json(projectData);
   } catch (err) {
     res.status(500).json(err);
   }
