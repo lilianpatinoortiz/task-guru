@@ -117,6 +117,9 @@ router.get("/homepage", withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
 
     const projectData = await Project.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
       include: [User, Task],
     });
     const projects = projectData.map((project) => project.get({ plain: true }));
@@ -146,6 +149,12 @@ router.get("/homepage", withAuth, async (req, res) => {
         return x.due_date - y.due_date;
       })
       .slice(0, 5); //  filter new tasks, order tasks asc by due_date, return the top 5
+const projectList = projectData
+      .map((project) => project.get({ plain: true }))
+      .sort(function (x,y){
+        return x.due_date - y.due_date;
+      })
+console.log (projectList);
 
     res.render("homepage", {
       ...user,
@@ -154,6 +163,7 @@ router.get("/homepage", withAuth, async (req, res) => {
       totalTasks,
       totalCompletedTaks,
       tasksDueSoon,
+      projectList,
       logged_in: true,
     });
   } catch (err) {
@@ -323,4 +333,5 @@ router.get("/editproject/:id", withAuth, async (req, res) => {
     res.redirect("/homepage");
   }
 });
+
 module.exports = router;
